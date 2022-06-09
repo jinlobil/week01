@@ -45,6 +45,7 @@ public class BenqController {
     // 게시글 삭제
     @DeleteMapping("/api/benq/{id}")
     public String deleteBenq(@PathVariable Long id, @RequestBody BenqRequestDto requestDto) {
+        System.out.println(requestDto);
         return benqService.delete(id, requestDto);
     }
 }

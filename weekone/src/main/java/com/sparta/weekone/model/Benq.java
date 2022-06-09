@@ -1,15 +1,15 @@
 package com.sparta.weekone.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sparta.weekone.dto.BenqRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
@@ -32,6 +32,12 @@ public class Benq {
 
     @Column(nullable = false)
     private Long password;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "benq", orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<Gram> gramList = new ArrayList<>();
+
+
 
     public Benq(BenqRequestDto requestDto) {
         this.title = requestDto.getTitle();
